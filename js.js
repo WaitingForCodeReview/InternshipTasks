@@ -60,7 +60,6 @@ const modalBtnCANCEL = document.getElementById("buttonCANCEL");
 const creationDateInput = document.getElementById("creationDate");
 const expirationDateInput = document.getElementById("expirationDate");
 
-
 plusIcon.addEventListener('click', () => {
     modal.style.display = "block";
 });
