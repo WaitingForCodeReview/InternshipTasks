@@ -1,0 +1,8 @@
+#container{
+    width: 75em;
+    margin: 3rem auto;
+    border: 3px dashed black;
+}
+#container h1{
+    text-align: center;
+}
