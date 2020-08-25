@@ -9,6 +9,31 @@
 
 <div id="container">
     <h1>TODO List</h1>
+
+    <div id="tasks"></div>
+
+    <div class="group">
+        <input id="taskInput" type="text" required>
+        <label>Add task here</label>
+        <span><img id="plusImage" src="./images/plusIcon.png" alt="plusIcon"></span>
+    </div>
+
+</div>
+
+<div id="my_modal" class="modal">
+    <div class="modal_content">
+        <h2>User-set dates</h2>
+        <div class="group">
+            <input id="creationDate" type="text" required>
+            <label>Creation Date</label>
+        </div>
+        <div class="group">
+            <input id="expirationDate" type="text" required>
+            <label>Expiration Date</label>
+        </div>
+        <a href="#" class="buttonModal" id="buttonOK">OK</a>
+        <a href="#" class="buttonModal" id="buttonCANCEL">CANCEL</a>
+    </div>
 </div>
 
 <script src="js.js"></script>
