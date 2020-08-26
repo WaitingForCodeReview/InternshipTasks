@@ -1,7 +1,6 @@
 import {Modal} from './Modal.js';
-import {createTask, isValidEnter, rejectTask} from "./Functions.js";
-import {taskInput} from "./Variables.js";
-import {tasksObj} from "./Variables.js";
+import {createTask, isValidEnter, rejectTask, markTaskAsDone, markTaskAsUnDone} from "./Functions.js";
+import {taskInput, tasksObj} from "./Variables.js";
 
 
 
@@ -26,3 +25,17 @@ const plusIcon = document.getElementById('plusImage');
 plusIcon.addEventListener('click', function PlusIconClicked() {
     modal.visible();
 });
+
+document.getElementById('tasks').onclick = function(event) {
+    if(event.target.type == 'checkbox') {
+        for(let i = 0; i < tasksObj.length; i++) {
+            if(tasksObj[i].checkBoxId == event.target.id) {
+                if(document.getElementById(tasksObj[i].checkBoxId).checked) {
+                    markTaskAsDone(tasksObj[i].divId);
+                } else {
+                    markTaskAsUnDone(tasksObj[i].divId);
+                }
+            }
+        }
+    }
+}

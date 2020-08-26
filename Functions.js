@@ -67,20 +67,7 @@ export function createTask() {
         `div${getUniqueId()}`
     );
     tasksObj.push(task);
-
     document.getElementById('tasks').innerHTML += task.getInnerHtml();
-
-    tasksObj.forEach( item => {
-        document.getElementById(item.checkBoxId).addEventListener('change', function textChange() {
-            if(this.checked) {
-                document.getElementById(item.divId).style.textDecoration = 'line-through';
-                document.getElementById(item.divId).style.color = 'grey';
-            } else {
-                document.getElementById(item.divId).style.textDecoration = 'none';
-                document.getElementById(item.divId).style.color = 'black';
-            }
-        })
-    })
     taskInput.value = "";
 }
 
@@ -100,4 +87,13 @@ export function createInputGroup(inputId, labelText) {
             <label>${labelText}</label>
         </div>
    `
+}
+
+export function markTaskAsDone(taskId) {
+    document.getElementById(taskId).style.textDecoration = 'line-through';
+    document.getElementById(taskId).style.color = 'grey';
+}
+export function markTaskAsUnDone(taskId) {
+    document.getElementById(taskId).style.textDecoration = 'none';
+    document.getElementById(taskId).style.color = 'black';
 }
