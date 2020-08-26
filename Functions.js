@@ -64,7 +64,9 @@ export function createTask() {
         getExpirationDate(currentDate),
         getTime(currentDate),
         `checkBox${getUniqueId()}`,
-        `div${getUniqueId()}`
+        `div${getUniqueId()}`,
+        `paragraph${getUniqueId()}`,
+        `mainId${getUniqueId()}`
     );
     tasksObj.push(task);
     document.getElementById('tasks').innerHTML += task.getInnerHtml();

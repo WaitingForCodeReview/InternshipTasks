@@ -26,7 +26,7 @@ plusIcon.addEventListener('click', function PlusIconClicked() {
     modal.visible();
 });
 
-document.getElementById('tasks').onclick = function(event) {
+document.getElementById('tasks').addEventListener('click', function targetCheckBox(event) {
     if(event.target.type == 'checkbox') {
         for(let i = 0; i < tasksObj.length; i++) {
             if(tasksObj[i].checkBoxId == event.target.id) {
@@ -38,4 +38,14 @@ document.getElementById('tasks').onclick = function(event) {
             }
         }
     }
-}
+});
+
+document.getElementById('tasks').addEventListener('click', function targetCrossbow(event) {
+    if(event.target.classList.contains('crossbow')) {
+        for(let i = 0; i < tasksObj.length; i++) {
+            if(tasksObj[i].paragraphId == event.target.id) {
+                document.getElementById(tasksObj[i].mainId).parentNode.removeChild(document.getElementById(tasksObj[i].mainId));
+            }
+        }
+    }
+});

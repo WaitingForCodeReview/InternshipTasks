@@ -53,7 +53,9 @@ export class Modal {
                     document.getElementById(modal.inputExpirationId).value,
                     document.getElementById(modal.inputExpirationTimeId).value,
                     `checkBox${getUniqueId()}`,
-                    `div${getUniqueId()}`
+                    `div${getUniqueId()}`,
+                    `paragraph${getUniqueId()}`,
+                    `mainId${getUniqueId()}`
                 );
 
                 tasksObj.push(task);

@@ -68,6 +68,10 @@ input:focus ~ label, input:valid ~ label {
     font-family: 'Alata', sans-serif;
     margin-bottom: 4rem;
 }
+
+.crossbow {
+    cursor: pointer;
+}
 /***/
 
 /*Styles for plus icon*/
