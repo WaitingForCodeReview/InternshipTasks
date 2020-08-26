@@ -5,10 +5,6 @@ export function isValidEnter(userEnter) {
     return userEnter.match(regex);
 }
 
-export function getUniqueId() {
-    return Date.now();
-}
-
 // gets and returns the current date
 export function getCreationDate(currentDate) {
     return `
@@ -62,11 +58,7 @@ export function createTask() {
         getCreationDate(currentDate),
         getTime(currentDate),
         getExpirationDate(currentDate),
-        getTime(currentDate),
-        `checkBox${getUniqueId()}`,
-        `div${getUniqueId()}`,
-        `paragraph${getUniqueId()}`,
-        `mainId${getUniqueId()}`
+        getTime(currentDate)
     );
     tasksObj.push(task);
     document.getElementById('tasks').innerHTML += task.getInnerHtml();

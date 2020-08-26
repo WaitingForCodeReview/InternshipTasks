@@ -1,5 +1,5 @@
 import {Task} from "./Task.js";
-import {createInputGroup, isValidEnter, rejectTask, getUniqueId} from "./Functions.js";
+import {createInputGroup, isValidEnter, rejectTask} from "./Functions.js";
 import {taskInput, tasksObj} from "./Variables.js";
 
 export class Modal {
@@ -52,10 +52,6 @@ export class Modal {
                     document.getElementById(modal.inputCreationTimeId).value,
                     document.getElementById(modal.inputExpirationId).value,
                     document.getElementById(modal.inputExpirationTimeId).value,
-                    `checkBox${getUniqueId()}`,
-                    `div${getUniqueId()}`,
-                    `paragraph${getUniqueId()}`,
-                    `mainId${getUniqueId()}`
                 );
 
                 tasksObj.push(task);

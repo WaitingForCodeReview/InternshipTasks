@@ -15,37 +15,35 @@ taskInput.addEventListener('keydown', function inputEnterPressed(event) {
 })
 
 
-let modal = new Modal('modal', 'inputCreation', 'inputExpiration', 'inputCreationTime',
+export let modal = new Modal('modal', 'inputCreation', 'inputExpiration', 'inputCreationTime',
                        'inputExpirationTime', 'buttonOK', 'buttonCANCEL', 'User-date,time-set');
 modal.initializeModal();
 Modal.initializeHandlers(modal);
 
 
 const plusIcon = document.getElementById('plusImage');
-plusIcon.addEventListener('click', function PlusIconClicked() {
+plusIcon.addEventListener('click', function plusIconClicked() {
     modal.visible();
 });
 
 document.getElementById('tasks').addEventListener('click', function targetCheckBox(event) {
-    if(event.target.type == 'checkbox') {
-        for(let i = 0; i < tasksObj.length; i++) {
-            if(tasksObj[i].checkBoxId == event.target.id) {
-                if(document.getElementById(tasksObj[i].checkBoxId).checked) {
-                    markTaskAsDone(tasksObj[i].divId);
-                } else {
-                    markTaskAsUnDone(tasksObj[i].divId);
-                }
+    const target = event.target;
+    tasksObj.forEach( item => {
+        if(item.checkBoxId == target.id) {
+            if(target.checked) {
+                markTaskAsDone(item.divId);
+            } else {
+                markTaskAsUnDone(item.divId);
             }
         }
-    }
+    })
 });
+
 
 document.getElementById('tasks').addEventListener('click', function targetCrossbow(event) {
     if(event.target.classList.contains('crossbow')) {
-        for(let i = 0; i < tasksObj.length; i++) {
-            if(tasksObj[i].paragraphId == event.target.id) {
-                document.getElementById(tasksObj[i].mainId).parentNode.removeChild(document.getElementById(tasksObj[i].mainId));
-            }
-        }
+        const target = event.target;
+        tasksObj.filter(item => item.paragraphId == target.id)
+            .forEach( item => document.getElementById(item.mainId).parentNode.removeChild(document.getElementById(item.mainId)));
     }
 });

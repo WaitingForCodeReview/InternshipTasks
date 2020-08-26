@@ -1,14 +1,17 @@
 export class Task {
-    constructor(text, creationDate, creationTime, expirationDate, expirationTime, checkBoxId, divId, paragraphId, mainId) {
+    constructor(text, creationDate, creationTime, expirationDate, expirationTime) {
         this.text = text;
         this.creationDate = creationDate;
         this.creationTime = creationTime;
         this.expirationDate = expirationDate;
         this.expirationTime = expirationTime;
-        this.checkBoxId = checkBoxId;
-        this.divId = divId;
-        this.paragraphId = paragraphId;
-        this.mainId = mainId;
+        this.checkBoxId = `checkbox${this.getUniqueId()}`;
+        this.divId = `divId${this.getUniqueId()}`;
+        this.paragraphId = `paragraphId${this.getUniqueId()}`;
+        this.mainId = `mainId${this.getUniqueId()}`;
+    }
+    getUniqueId() {
+        return Date.now();
     }
 
     getInnerHtml() {
