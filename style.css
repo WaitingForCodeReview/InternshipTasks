@@ -92,7 +92,9 @@ input:focus ~ label, input:valid ~ label {
 }
 .modal .modal_content {
     background-color: #fefefe;
-    margin: 15% auto;
+    position: absolute;
+    left: 25%;
+    top: 15%;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
