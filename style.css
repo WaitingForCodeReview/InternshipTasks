@@ -58,6 +58,8 @@ input:focus ~ label, input:valid ~ label {
 
 /*Styles for tasks*/
 #tasks {
+    display: flex;
+    flex-direction: column;
     margin-left: 2rem;
 }
 #tasks p {

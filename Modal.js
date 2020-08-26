@@ -1,6 +1,8 @@
 import {Task} from "./Task.js";
 import {createInputGroup, isValidEnter, rejectTask} from "./Functions.js";
 import {taskInput} from "./Variables.js";
+import {tasksObj} from "./Variables.js";
+import {getUniqueId} from "./Functions.js";
 
 export class Modal {
     constructor(selfId, inputCreationId, inputExpirationId, inputCreationTimeId,
@@ -51,10 +53,26 @@ export class Modal {
                     document.getElementById(modal.inputCreationId).value,
                     document.getElementById(modal.inputCreationTimeId).value,
                     document.getElementById(modal.inputExpirationId).value,
-                    document.getElementById(modal.inputExpirationTimeId).value
+                    document.getElementById(modal.inputExpirationTimeId).value,
+                    `checkBox${getUniqueId()}`,
+                    `div${getUniqueId()}`
                 );
 
+                tasksObj.push(task);
+
                 document.getElementById('tasks').innerHTML += task.getInnerHtml();
+
+                tasksObj.forEach( item => {
+                    document.getElementById(item.checkBoxId).addEventListener('change', function textChange() {
+                        if(this.checked) {
+                            document.getElementById(item.divId).style.textDecoration = 'line-through';
+                            document.getElementById(item.divId).style.color = 'grey';
+                        } else {
+                            document.getElementById(item.divId).style.textDecoration = 'none';
+                            document.getElementById(item.divId).style.color = 'black';
+                        }
+                    })
+                })
                 taskInput.value = "";
             } else {
                 rejectTask();

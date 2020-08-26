@@ -1,6 +1,7 @@
 import {Modal} from './Modal.js';
 import {createTask, isValidEnter, rejectTask} from "./Functions.js";
 import {taskInput} from "./Variables.js";
+import {tasksObj} from "./Variables.js";
 
 
 

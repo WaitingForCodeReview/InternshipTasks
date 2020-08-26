@@ -1,8 +1,12 @@
 import {Task} from "./Task.js";
-import {regex, taskInput, tasks} from "./Variables.js";
+import {regex, taskInput, tasksObj} from "./Variables.js";
 
 export function isValidEnter(userEnter) {
     return userEnter.match(regex);
+}
+
+export function getUniqueId() {
+    return Date.now();
 }
 
 // gets and returns the current date
@@ -58,10 +62,25 @@ export function createTask() {
         getCreationDate(currentDate),
         getTime(currentDate),
         getExpirationDate(currentDate),
-        getTime(currentDate)
+        getTime(currentDate),
+        `checkBox${getUniqueId()}`,
+        `div${getUniqueId()}`
     );
-    tasks.push(task);
+    tasksObj.push(task);
+
     document.getElementById('tasks').innerHTML += task.getInnerHtml();
+
+    tasksObj.forEach( item => {
+        document.getElementById(item.checkBoxId).addEventListener('change', function textChange() {
+            if(this.checked) {
+                document.getElementById(item.divId).style.textDecoration = 'line-through';
+                document.getElementById(item.divId).style.color = 'grey';
+            } else {
+                document.getElementById(item.divId).style.textDecoration = 'none';
+                document.getElementById(item.divId).style.color = 'black';
+            }
+        })
+    })
     taskInput.value = "";
 }
 
