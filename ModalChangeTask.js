@@ -61,9 +61,6 @@ export class ModalChangeTask {
             const selfInputTaskElem = document.getElementById(modal.selfInputTaskId);
             const selfInputCreationDateElem = document.getElementById(modal.selfInputCreationDateId);
             const selfInputExpirationDateElem = document.getElementById(modal.selfInputExpirationDateId);
-
-            // !!!!!   СПРОСИТЬ ЗА ВРЕМЯ (СКАЗАЛ УБРАТЬ ВРЕМЯ) ЕСЛИ УБРАТЬ ТО НЕТ НУЖДЫ ТОГДА ВО ВТОРОМ МЕТОДЕ   !!!!!
-
             const selfInputTimeCreationElem = document.getElementById(modal.selfInputTimeCreationId);
             const selfInputTimeExpirationElem = document.getElementById(modal.selfInputTimeExpirationId);
 
