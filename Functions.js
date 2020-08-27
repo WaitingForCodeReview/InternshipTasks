@@ -1,5 +1,5 @@
 import {Task} from "./Task.js";
-import {regex, taskInput, tasksObj} from "./Variables.js";
+import {regex, taskInput, tasksObj, INVALID_DATE} from "./Variables.js";
 
 export function isValidEnter(userEnter) {
     return userEnter.match(regex);
@@ -68,8 +68,10 @@ export function createTask() {
 // rejects the inputted value
 export function rejectTask() {
     taskInput.style.color = 'red';
+    taskInput.style.backgroundColor = ' rgba(255, 0, 0, 0.3)';
     setTimeout(()=>{
         taskInput.style.color = 'black';
+        taskInput.style.backgroundColor = 'white';
     }, 2000);
 }
 
@@ -98,4 +100,16 @@ export function markTaskAsDone(taskId) {
 export function markTaskAsUnDone(taskId) {
     document.getElementById(taskId).style.textDecoration = 'none';
     document.getElementById(taskId).style.color = 'black';
+}
+
+export function isValidDate(dateStart, dateEnd) {
+    return dateStart < dateEnd;
+}
+
+export function convertDate(dateString) {
+    // split string with / to create ['mm','dd','yyyy']
+    let tempArr = dateString.split('/');
+    // replace 'dd' and 'mm' to get ['dd', 'mm', 'yyyy']
+    [tempArr[0], tempArr[1]] = [tempArr[1], tempArr[0]];
+    return new Date(tempArr.join('-'));
 }
