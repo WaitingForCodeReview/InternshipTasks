@@ -18,13 +18,12 @@ taskInput.addEventListener('keydown', function inputEnterPressed(event) {
 
 export let modal = new Modal({
     selfId : 'modal',
+    inputTaskId : 'inputTask',
     inputCreationId : 'inputCreation',
     inputExpirationId : 'inputExpiration',
-    inputCreationTimeId : 'inputCreationTime',
-    inputExpirationTimeId: 'inputExpirationTime',
     buttonOKId : 'buttonOK',
     buttonCANCELId : 'buttonCANCEL',
-    hText : 'User-date,time-set'
+    hText : 'User-date-set'
 });
 
 modal.initializeModal();

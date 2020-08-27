@@ -50,12 +50,14 @@ label {
 
 /* active state */
 input:focus ~ label, input:valid ~ label {
-    top: -15px;
+    top: -18px;
     font-size: 17px;
     color: #5264AE;
 }
 
-
+.groupCalendar {
+    padding: 35px;
+}
 /*Styles for tasks*/
 #tasks {
     display: flex;

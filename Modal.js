@@ -1,13 +1,14 @@
 import {Task} from "./Task.js";
 import {createInputGroup, isValidEnter, rejectTask} from "./Functions.js";
 import {taskInput, tasksObj} from "./Variables.js";
+import {createInputTask} from "./Functions.js";
+import {convertDate, isValidDate} from "./Functions.js";
 
 export class Modal {
     selfId
+    inputTaskId
     inputCreationId
     inputExpirationId
-    inputCreationTimeId
-    inputExpirationTimeId
     buttonOKId
     buttonCANCELId
     hText
@@ -22,10 +23,9 @@ export class Modal {
                 <div class="modal_content">
                     <h2>${this.hText}</h2>
                     
-                    ${createInputGroup(this.inputCreationId, 'Creation Date')}
-                    ${createInputGroup(this.inputExpirationId, 'Expiration Date')}
-                    ${createInputGroup(this.inputCreationTimeId, 'Creation Time')}
-                    ${createInputGroup(this.inputExpirationTimeId, 'Expiration Time')}
+                    ${createInputTask(this.inputTaskId, 'Task :')}
+                    ${createInputGroup(this.inputCreationId, 'Creation Date :')}
+                    ${createInputGroup(this.inputExpirationId, 'Expiration Date :')}
                     
                     <a href="#" class="buttonModal" id="${this.buttonOKId}">OK</a>
                     <a href="#" class="buttonModal" id="${this.buttonCANCELId}">CANCEL</a>
@@ -37,33 +37,59 @@ export class Modal {
     static clearInputs(modal) {
         document.getElementById(modal.inputCreationId).value = "";
         document.getElementById(modal.inputExpirationId).value = "";
-        document.getElementById(modal.inputCreationTimeId).value = "";
-        document.getElementById(modal.inputExpirationTimeId).value = "";
+        document.getElementById(modal.inputTaskId).value = "";
     }
 
     static initializeHandlers(modal) {
         document.getElementById(modal.buttonOKId).addEventListener('click', function okClicked() {
-            document.getElementById(modal.selfId).style.display = "none";
+            const inputTask = document.getElementById(modal.inputTaskId);
+            const dateCreation = convertDate(document.getElementById(modal.inputCreationId).value);
+            const dateExpiration = convertDate(document.getElementById(modal.inputExpirationId).value);
 
-            if(isValidEnter(taskInput.value)) {
+            if(isValidEnter(inputTask.value) && isValidDate(dateCreation,dateExpiration)) {
                 const now = new Date();
 
                 const task = new Task({
-                    text : taskInput.value,
+                    text : inputTask.value,
                     creationDate : document.getElementById(modal.inputCreationId).value,
-                    creationTime : document.getElementById(modal.inputCreationTimeId).value,
+                    creationTime : 'modalEnter',
                     expirationDate : document.getElementById(modal.inputExpirationId).value,
-                    expirationTime : document.getElementById(modal.inputExpirationTimeId).value,
+                    expirationTime : 'modalEnter',
                 });
 
                 tasksObj.push(task);
-                document.getElementById('tasks').innerHTML += task.getInnerHtml();
+                document.getElementById('tasks').innerHTML += task.getInnerHtmlModal();
                 taskInput.value = "";
+                Modal.clearInputs(modal);
+                document.getElementById(modal.selfId).style.display = "none";
             } else {
-                rejectTask();
-            }
+                if(!isValidEnter(inputTask.value)){
+                    inputTask.style.color = 'red';
+                    inputTask.style.backgroundColor = ' rgba(255, 0, 0, 0.3)';
+                    setTimeout(() => {
+                        inputTask.style.color = 'black';
+                        inputTask.style.backgroundColor = 'white';
+                    }, 2000);
+                }
+                if(!isValidDate(dateCreation,dateExpiration)) {
+                    const creationElem = document.getElementById(modal.inputCreationId);
+                    const expirationElem = document.getElementById(modal.inputExpirationId);
 
-            Modal.clearInputs(modal);
+                    creationElem.style.color = 'red';
+                    creationElem.style.backgroundColor = ' rgba(255, 0, 0, 0.3)';
+                    setTimeout(() => {
+                        creationElem.style.color = 'black';
+                        creationElem.style.backgroundColor = 'white';
+                    }, 2000);
+
+                    expirationElem.style.color = 'red';
+                    expirationElem.style.backgroundColor = ' rgba(255, 0, 0, 0.3)';
+                    setTimeout(() => {
+                        expirationElem.style.color = 'black';
+                        expirationElem.style.backgroundColor = 'white';
+                    }, 2000);
+                }
+            }
         });
 
         document.getElementById(modal.buttonCANCELId).addEventListener('click', function cancelClicked() {
