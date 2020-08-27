@@ -10,12 +10,18 @@ export class Task {
     constructor(taskData) {
         Object.assign(this, { ...taskData });
 
-        this.checkBoxId = `checkbox${this.getUniqueId()}`;
-        this.divId = `divId${this.getUniqueId()}`;
-        this.paragraphId = `paragraphId${this.getUniqueId()}`;
-        this.mainId = `mainId${this.getUniqueId()}`;
+        this.taskTextId = `taskTextId${Task.getUniqueId()}`;
+        this.creationDateId = `creationDateId${Task.getUniqueId()}`;
+        this.creationTimeId = `creationTimeId${Task.getUniqueId()}`;
+        this.expirationDateId = `expirationDateId${Task.getUniqueId()}`;
+        this.expirationTimeId = `expirationTimeId${Task.getUniqueId()}`;
+        this.pencilId = `pencil${Task.getUniqueId()}`
+        this.checkBoxId = `checkbox${Task.getUniqueId()}`;
+        this.divId = `divId${Task.getUniqueId()}`;
+        this.paragraphId = `paragraphId${Task.getUniqueId()}`;
+        this.mainId = `mainId${Task.getUniqueId()}`;
     }
-    getUniqueId() {
+    static getUniqueId() {
         return Date.now();
     }
 
@@ -24,15 +30,18 @@ export class Task {
             <div style="display: flex" id="${this.mainId}">
                 <div style="width: 45%" id="${this.divId}">
                     <p>
-                        Task: ${this.text} <br> 
-                        Creation Date: ${this.creationDate} <br>
-                        Creation Time: ${this.creationTime} <br>
-                        Expiration Date: ${this.expirationDate} <br>
-                        Expiration Time: ${this.expirationTime} <br> 
+                        <strong id=${this.taskTextId}>Task: ${this.text}</strong> <br> 
+                        <strong id=${this.creationDateId}>Creation Date: ${this.creationDate}</strong> <br>
+                        <strong id=${this.creationTimeId}>Creation Time: ${this.creationTime}</strong> <br>
+                        <strong id=${this.expirationDateId}>Expiration Date: ${this.expirationDate}</strong> <br>
+                        <strong id=${this.expirationTimeId}>Expiration Time: ${this.expirationTime}</strong> <br> 
                     </p>
                 </div>
                 <div style="width: 45%;">
-                    <p id="${this.paragraphId}" class="crossbow" style="margin-left: -3rem; margin-top: 1rem;">&times</p>
+                    <div class="pencil">
+                        <i class="fas fa-edit" id="${this.pencilId}"></i>
+                    </div>
+                    <p id="${this.paragraphId}" class="crossbow" style="margin-left: -3rem; margin-top: 1rem; width: 10px;">&times</p>
                     <input type="checkbox" id="${this.checkBoxId}" style="width: 25%; height: 25%; margin-top: -7%; margin-left: -10rem;">
                 </div>
             </div>
@@ -44,13 +53,16 @@ export class Task {
             <div style="display: flex" id="${this.mainId}">
                 <div style="width: 45%" id="${this.divId}">
                     <p>
-                        Task: ${this.text} <br> 
-                        Creation Date: ${this.creationDate} <br>
-                        Expiration Date: ${this.expirationDate} <br>
+                        <strong id=${this.taskTextId}>Task: ${this.text}</strong> <br> 
+                        <strong id=${this.creationDateId}>Creation Date: ${this.creationDate}</strong> <br>
+                        <strong id=${this.expirationDateId}>Expiration Date: ${this.expirationDate}</strong> <br>
                     </p>
                 </div>
                 <div style="width: 45%;">
-                    <p id="${this.paragraphId}" class="crossbow" style="margin-left: -3rem; margin-top: 1rem;">&times</p>
+                    <div class="pencil">
+                        <i class="fas fa-edit" id="${this.pencilId}"></i>
+                    </div>
+                    <p id="${this.paragraphId}" class="crossbow" style="margin-left: -3rem; margin-top: 1rem; width: 10px;">&times</p>
                     <input type="checkbox" id="${this.checkBoxId}" style="width: 25%; height: 25%; margin-top: -7%; margin-left: -10rem;">
                 </div>
             </div>

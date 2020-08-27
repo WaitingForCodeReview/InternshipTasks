@@ -8,9 +8,7 @@ export function isValidEnter(userEnter) {
 // gets and returns the current date
 export function getCreationDate(currentDate) {
     return `
-       ${currentDate.getDate()} /
-       ${(currentDate.getMonth() + 1)} / 
-       ${currentDate.getFullYear()}
+       ${currentDate.getDate()}-${(currentDate.getMonth() + 1)}-${currentDate.getFullYear()}
     `
     // currentDate.getMonth() + 1 : because months are from 0 to 11, we need : 1 - 12
 }
@@ -18,8 +16,7 @@ export function getCreationDate(currentDate) {
 // gets and returns the current time
 export function getTime(currentTime) {
     return `
-       ${currentTime.getHours()} : 
-       ${currentTime.getMinutes()}
+       ${currentTime.getHours()}:${currentTime.getMinutes()}
     `
 }
 
@@ -43,9 +40,7 @@ export function getExpirationDate(currentDate) {
     }
 
     return `
-        ${expirationDay} /
-        ${expirationMonth} / 
-        ${expirationYear}
+        ${expirationDay}-${expirationMonth}-${expirationYear}
     `
 }
 
@@ -79,7 +74,7 @@ export function rejectTask() {
 export function createInputGroup(inputId, pText) {
     return `
         <div class="groupCalendar">
-            <p>${pText}<input id="${inputId}" class="datepicker" type="text" required></p>
+            <p>${pText}<input id="${inputId}" type="date" required></p>
         </div>
    `
 }
@@ -103,12 +98,49 @@ export function markTaskAsUnDone(taskId) {
 }
 
 export function isValidDate(dateStart, dateEnd) {
+    dateStart = new Date(dateStart);
+    dateEnd = new Date(dateEnd);
     return ((Date.now() <= dateStart) && (dateStart <= dateEnd));
 }
 
 export function convertDate(dateString) {
-    // split string with / to create ['mm','dd','yyyy']
-    let tempArr = dateString.split('/');
-    // join to create mm-dd-yyyy
-    return new Date(tempArr.join('-'));
+    let tempArr = dateString.split('.').reverse();
+    return tempArr.join('-');
+}
+
+export function convertDateReadable(dateString) {
+    return dateString.split('-').reverse().join('-');
+}
+
+export function isValidTime(timeEntered) {
+    const timeRegex = new RegExp(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/);
+    return timeEntered.match(timeRegex);
+}
+
+export function markAsInvalid(elem) {
+    elem.style.color = 'red';
+    elem.style.backgroundColor = ' rgba(255, 0, 0, 0.3)';
+    setTimeout(() => {
+        elem.style.color = 'black';
+        elem.style.backgroundColor = 'white';
+    }, 2000);
+}
+
+export function sliceElementText(elementText) {
+    const SYMBOLS_BETWEEN = 2;
+    let index = elementText.indexOf(': ');
+    return elementText.substring(index + SYMBOLS_BETWEEN, elementText.length);
+}
+
+export function convertForInputDate(dateString) {
+    // we have default : dd-mm-yyyy
+    // need to return  : yyyy-mm-dd
+    let dateArr = dateString.split('-').reverse(); //['yyyy', 'mm', 'dd']
+    // if mm or dd has only 1 symbol, we need to add '0' to the its start
+    dateArr.forEach( (item, i) => {
+        if(item.length === 1) {
+            dateArr[i] = '0' + item;
+        }
+    })
+    return dateArr.join('-');
 }

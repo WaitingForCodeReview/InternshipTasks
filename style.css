@@ -50,7 +50,7 @@ label {
 
 /* active state */
 input:focus ~ label, input:valid ~ label {
-    top: -18px;
+    top: -15px;
     font-size: 17px;
     color: #5264AE;
 }
@@ -73,6 +73,14 @@ input:focus ~ label, input:valid ~ label {
 
 .crossbow {
     cursor: pointer;
+}
+
+#tasks i {
+    cursor: pointer;
+}
+.pencil {
+    position: absolute;
+    margin-top: 1.7rem;
 }
 /***/
 
