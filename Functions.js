@@ -103,13 +103,12 @@ export function markTaskAsUnDone(taskId) {
 }
 
 export function isValidDate(dateStart, dateEnd) {
-    return dateStart < dateEnd;
+    return ((Date.now() <= dateStart) && (dateStart <= dateEnd));
 }
 
 export function convertDate(dateString) {
     // split string with / to create ['mm','dd','yyyy']
     let tempArr = dateString.split('/');
-    // replace 'dd' and 'mm' to get ['dd', 'mm', 'yyyy']
-    [tempArr[0], tempArr[1]] = [tempArr[1], tempArr[0]];
+    // join to create mm-dd-yyyy
     return new Date(tempArr.join('-'));
 }
