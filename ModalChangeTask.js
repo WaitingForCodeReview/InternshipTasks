@@ -24,15 +24,9 @@ export class ModalChangeTask {
 
         // choose which modal to create : with time edit or not (depends on task)
         if(document.getElementById(this.toChangeCreationTimeId) !== null) {
-            this.initializeChangeModal();
-            ModalChangeTask.initializeChangeHandlers(this);
-            this.initializeInputDefaultValues()
-            this.visible();
+            this.initializeAssembleFull()
         } else {
-            this.initializeChangeModalSimplified();
-            ModalChangeTask.initializeChangeHandlersSimplified(this);
-            this.initializeInputDefaultValuesSimplified()
-            this.visible();
+            this.initializeAssembleSimplified();
         }
     }
 
@@ -67,6 +61,9 @@ export class ModalChangeTask {
             const selfInputTaskElem = document.getElementById(modal.selfInputTaskId);
             const selfInputCreationDateElem = document.getElementById(modal.selfInputCreationDateId);
             const selfInputExpirationDateElem = document.getElementById(modal.selfInputExpirationDateId);
+
+            // !!!!!   СПРОСИТЬ ЗА ВРЕМЯ (СКАЗАЛ УБРАТЬ ВРЕМЯ) ЕСЛИ УБРАТЬ ТО НЕТ НУЖДЫ ТОГДА ВО ВТОРОМ МЕТОДЕ   !!!!!
+
             const selfInputTimeCreationElem = document.getElementById(modal.selfInputTimeCreationId);
             const selfInputTimeExpirationElem = document.getElementById(modal.selfInputTimeExpirationId);
 
@@ -172,6 +169,19 @@ export class ModalChangeTask {
         document.getElementById(modal.buttonCANCELId).addEventListener('click', function cancelClicked() {
             document.getElementById(modal.selfId).style.display = "none";
         });
+    }
+
+    initializeAssembleFull() {
+        this.initializeChangeModal();
+        ModalChangeTask.initializeChangeHandlers(this);
+        this.initializeInputDefaultValues()
+        this.visible();
+    }
+    initializeAssembleSimplified() {
+        this.initializeChangeModalSimplified();
+        ModalChangeTask.initializeChangeHandlersSimplified(this);
+        this.initializeInputDefaultValuesSimplified()
+        this.visible();
     }
 
     visible() {

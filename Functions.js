@@ -97,14 +97,16 @@ export function markTaskAsUnDone(taskId) {
     document.getElementById(taskId).style.color = 'black';
 }
 
-export function isValidDate(dateStart, dateEnd) {
-    dateStart = new Date(dateStart);
-    dateEnd = new Date(dateEnd);
-    return ((Date.now() <= dateStart) && (dateStart <= dateEnd));
+export function isValidDate(dateStartString, dateEndString) {
+    const dateStartObject = new Date(dateStartString);
+    const dateEndObject = new Date(dateEndString);
+
+    return ((Date.now() <= dateStartObject) && (dateStartObject <= dateEndObject));
 }
 
 export function convertDate(dateString) {
-    let tempArr = dateString.split('.').reverse();
+    const tempArr = dateString.split('.').reverse();
+
     return tempArr.join('-');
 }
 
@@ -114,6 +116,7 @@ export function convertDateReadable(dateString) {
 
 export function isValidTime(timeEntered) {
     const timeRegex = new RegExp(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/);
+
     return timeEntered.match(timeRegex);
 }
 
@@ -128,7 +131,8 @@ export function markAsInvalid(elem) {
 
 export function sliceElementText(elementText) {
     const SYMBOLS_BETWEEN = 2;
-    let index = elementText.indexOf(': ');
+    const index = elementText.indexOf(': ');
+
     return elementText.substring(index + SYMBOLS_BETWEEN, elementText.length);
 }
 
