@@ -1,5 +1,5 @@
 import {Task} from "./Task.js";
-import {regex, taskInput, tasks} from "./Variables.js";
+import {regex, taskInput, tasksObj, INVALID_DATE} from "./Variables.js";
 
 export function isValidEnter(userEnter) {
     return userEnter.match(regex);
@@ -53,14 +53,14 @@ export function getExpirationDate(currentDate) {
 export function createTask() {
     const currentDate = new Date();
 
-    const task = new Task(
-        taskInput.value,
-        getCreationDate(currentDate),
-        getTime(currentDate),
-        getExpirationDate(currentDate),
-        getTime(currentDate)
-    );
-    tasks.push(task);
+    const task = new Task({
+        text : taskInput.value,
+        creationDate : getCreationDate(currentDate),
+        creationTime : getTime(currentDate),
+        expirationDate : getExpirationDate(currentDate),
+        expirationTime : getTime(currentDate)
+    });
+    tasksObj.push(task);
     document.getElementById('tasks').innerHTML += task.getInnerHtml();
     taskInput.value = "";
 }
@@ -68,17 +68,47 @@ export function createTask() {
 // rejects the inputted value
 export function rejectTask() {
     taskInput.style.color = 'red';
+    taskInput.style.backgroundColor = ' rgba(255, 0, 0, 0.3)';
     setTimeout(()=>{
         taskInput.style.color = 'black';
+        taskInput.style.backgroundColor = 'white';
     }, 2000);
 }
 
-// creates an input-group
-export function createInputGroup(inputId, labelText) {
+// creates an input-calendar-group
+export function createInputGroup(inputId, pText) {
     return `
-        <div class="group">
-            <input id="${inputId}" type="text" required>
-            <label>${labelText}</label>
+        <div class="groupCalendar">
+            <p>${pText}<input id="${inputId}" class="datepicker" type="text" required></p>
         </div>
    `
+}
+
+// creates an input-task-modal-group
+export function createInputTask(inputId, pText) {
+    return `
+        <div class="groupCalendar">
+            <p>${pText}<input id="${inputId}" type="text" required></p>
+        </div>
+   `
+}
+
+export function markTaskAsDone(taskId) {
+    document.getElementById(taskId).style.textDecoration = 'line-through';
+    document.getElementById(taskId).style.color = 'grey';
+}
+export function markTaskAsUnDone(taskId) {
+    document.getElementById(taskId).style.textDecoration = 'none';
+    document.getElementById(taskId).style.color = 'black';
+}
+
+export function isValidDate(dateStart, dateEnd) {
+    return ((Date.now() <= dateStart) && (dateStart <= dateEnd));
+}
+
+export function convertDate(dateString) {
+    // split string with / to create ['mm','dd','yyyy']
+    let tempArr = dateString.split('/');
+    // join to create mm-dd-yyyy
+    return new Date(tempArr.join('-'));
 }
