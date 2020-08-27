@@ -3,17 +3,19 @@ import {createInputGroup, isValidEnter, rejectTask} from "./Functions.js";
 import {taskInput, tasksObj} from "./Variables.js";
 
 export class Modal {
-    constructor(selfId, inputCreationId, inputExpirationId, inputCreationTimeId,
-                inputExpirationTimeId, buttonOKId, buttonCANCELId, hText) {
-        this.selfId = selfId;
-        this.inputCreationId = inputCreationId;
-        this.inputExpirationId = inputExpirationId;
-        this.inputCreationTimeId = inputCreationTimeId;
-        this.inputExpirationTimeId = inputExpirationTimeId;
-        this.buttonOKId = buttonOKId;
-        this.buttonCANCELId = buttonCANCELId;
-        this.hText = hText;
+    selfId
+    inputCreationId
+    inputExpirationId
+    inputCreationTimeId
+    inputExpirationTimeId
+    buttonOKId
+    buttonCANCELId
+    hText
+
+    constructor(modalData) {
+        Object.assign(this, { ...modalData });
     }
+
     initializeModal() {
         document.getElementById('forModal').innerHTML = `
             <div id="${this.selfId}" class="modal">
