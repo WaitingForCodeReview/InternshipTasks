@@ -73,12 +73,20 @@ export function rejectTask() {
     }, 2000);
 }
 
-// creates an input-group
-export function createInputGroup(inputId, labelText) {
+// creates an input-calendar-group
+export function createInputGroup(inputId, pText) {
     return `
-        <div class="group">
-            <input id="${inputId}" type="text" required>
-            <label>${labelText}</label>
+        <div class="groupCalendar">
+            <p>${pText}<input id="${inputId}" class="datepicker" type="text" required></p>
+        </div>
+   `
+}
+
+// creates an input-task-modal-group
+export function createInputTask(inputId, pText) {
+    return `
+        <div class="groupCalendar">
+            <p>${pText}<input id="${inputId}" type="text" required></p>
         </div>
    `
 }

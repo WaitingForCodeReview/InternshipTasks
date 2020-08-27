@@ -1,13 +1,13 @@
 import {Task} from "./Task.js";
 import {createInputGroup, isValidEnter, rejectTask} from "./Functions.js";
 import {taskInput, tasksObj} from "./Variables.js";
+import {createInputTask} from "./Functions.js";
 
 export class Modal {
     selfId
+    inputTaskId
     inputCreationId
     inputExpirationId
-    inputCreationTimeId
-    inputExpirationTimeId
     buttonOKId
     buttonCANCELId
     hText
@@ -22,10 +22,9 @@ export class Modal {
                 <div class="modal_content">
                     <h2>${this.hText}</h2>
                     
-                    ${createInputGroup(this.inputCreationId, 'Creation Date')}
-                    ${createInputGroup(this.inputExpirationId, 'Expiration Date')}
-                    ${createInputGroup(this.inputCreationTimeId, 'Creation Time')}
-                    ${createInputGroup(this.inputExpirationTimeId, 'Expiration Time')}
+                    ${createInputTask(this.inputTaskId, 'Task :')}
+                    ${createInputGroup(this.inputCreationId, 'Creation Date :')}
+                    ${createInputGroup(this.inputExpirationId, 'Expiration Date :')}
                     
                     <a href="#" class="buttonModal" id="${this.buttonOKId}">OK</a>
                     <a href="#" class="buttonModal" id="${this.buttonCANCELId}">CANCEL</a>
@@ -37,33 +36,34 @@ export class Modal {
     static clearInputs(modal) {
         document.getElementById(modal.inputCreationId).value = "";
         document.getElementById(modal.inputExpirationId).value = "";
-        document.getElementById(modal.inputCreationTimeId).value = "";
-        document.getElementById(modal.inputExpirationTimeId).value = "";
+        document.getElementById(modal.inputTaskId).value = "";
     }
 
     static initializeHandlers(modal) {
         document.getElementById(modal.buttonOKId).addEventListener('click', function okClicked() {
-            document.getElementById(modal.selfId).style.display = "none";
-
-            if(isValidEnter(taskInput.value)) {
+            const inputTask = document.getElementById(modal.inputTaskId);
+            if(isValidEnter(inputTask.value)) {
                 const now = new Date();
 
                 const task = new Task({
-                    text : taskInput.value,
+                    text : inputTask.value,
                     creationDate : document.getElementById(modal.inputCreationId).value,
-                    creationTime : document.getElementById(modal.inputCreationTimeId).value,
+                    creationTime : 'modalEnter',
                     expirationDate : document.getElementById(modal.inputExpirationId).value,
-                    expirationTime : document.getElementById(modal.inputExpirationTimeId).value,
+                    expirationTime : 'modalEnter',
                 });
 
                 tasksObj.push(task);
-                document.getElementById('tasks').innerHTML += task.getInnerHtml();
+                document.getElementById('tasks').innerHTML += task.getInnerHtmlModal();
                 taskInput.value = "";
+                Modal.clearInputs(modal);
+                document.getElementById(modal.selfId).style.display = "none";
             } else {
-                rejectTask();
+                inputTask.style.color = 'red';
+                setTimeout(()=>{
+                    inputTask.style.color = 'black';
+                }, 2000);
             }
-
-            Modal.clearInputs(modal);
         });
 
         document.getElementById(modal.buttonCANCELId).addEventListener('click', function cancelClicked() {
