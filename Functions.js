@@ -53,13 +53,13 @@ export function getExpirationDate(currentDate) {
 export function createTask() {
     const currentDate = new Date();
 
-    const task = new Task(
-        taskInput.value,
-        getCreationDate(currentDate),
-        getTime(currentDate),
-        getExpirationDate(currentDate),
-        getTime(currentDate)
-    );
+    const task = new Task({
+        text : taskInput.value,
+        creationDate : getCreationDate(currentDate),
+        creationTime : getTime(currentDate),
+        expirationDate : getExpirationDate(currentDate),
+        expirationTime : getTime(currentDate)
+    });
     tasksObj.push(task);
     document.getElementById('tasks').innerHTML += task.getInnerHtml();
     taskInput.value = "";

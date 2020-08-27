@@ -1,10 +1,15 @@
+import {tasksObj} from "./Variables.js";
+
 export class Task {
-    constructor(text, creationDate, creationTime, expirationDate, expirationTime) {
-        this.text = text;
-        this.creationDate = creationDate;
-        this.creationTime = creationTime;
-        this.expirationDate = expirationDate;
-        this.expirationTime = expirationTime;
+    text
+    creationDate
+    creationTime
+    expirationDate
+    expirationTime
+
+    constructor(taskData) {
+        Object.assign(this, { ...taskData });
+
         this.checkBoxId = `checkbox${this.getUniqueId()}`;
         this.divId = `divId${this.getUniqueId()}`;
         this.paragraphId = `paragraphId${this.getUniqueId()}`;
@@ -33,4 +38,14 @@ export class Task {
             </div>
         `
     }
+
+    static removeTask(taskDivId) {
+        // remove from HTML
+        document.getElementById(taskDivId).parentNode.removeChild(document.getElementById(taskDivId));
+
+        // remove from Tasks array
+        const removeElemIndex = tasksObj.findIndex( item => item.mainId === taskDivId);
+        tasksObj.splice(removeElemIndex, 1);
+    }
+
 }

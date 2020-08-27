@@ -46,13 +46,13 @@ export class Modal {
             if(isValidEnter(taskInput.value)) {
                 const now = new Date();
 
-                const task = new Task(
-                    taskInput.value,
-                    document.getElementById(modal.inputCreationId).value,
-                    document.getElementById(modal.inputCreationTimeId).value,
-                    document.getElementById(modal.inputExpirationId).value,
-                    document.getElementById(modal.inputExpirationTimeId).value,
-                );
+                const task = new Task({
+                    text : taskInput.value,
+                    creationDate : document.getElementById(modal.inputCreationId).value,
+                    creationTime : document.getElementById(modal.inputCreationTimeId).value,
+                    expirationDate : document.getElementById(modal.inputExpirationId).value,
+                    expirationTime : document.getElementById(modal.inputExpirationTimeId).value,
+                });
 
                 tasksObj.push(task);
                 document.getElementById('tasks').innerHTML += task.getInnerHtml();
