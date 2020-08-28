@@ -57,12 +57,11 @@ document.getElementById('tasks').addEventListener('click', function targetEdit(e
         const element = tasksObj.find(item => item.pencilId === target.id);
         let modalChange = new ModalChangeTask({
             selfId : 'changeTask',
-            toChangeTaskId : element.taskTextId,
-            toChangeCreationDateId : element.creationDateId,
-            toChangeExpirationDateId : element.expirationDateId,
-            toChangeCreationTimeId : element.creationTimeId,
-            toChangeExpirationTimeId : element.expirationTimeId,
+            // toChangeTaskId : element.taskTextId,
+            // toChangeCreationDateId : element.creationDateId,
+            // toChangeExpirationDateId : element.expirationDateId,
             hText : 'User task-change',
-        })
+            targetObject : element,
+        });
     }
 });

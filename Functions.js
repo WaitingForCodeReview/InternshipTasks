@@ -7,17 +7,8 @@ export function isValidEnter(userEnter) {
 
 // gets and returns the current date
 export function getCreationDate(currentDate) {
-    return `
-       ${currentDate.getDate()}-${(currentDate.getMonth() + 1)}-${currentDate.getFullYear()}
-    `
+    return `${currentDate.getDate()}-${(currentDate.getMonth() + 1)}-${currentDate.getFullYear()}`
     // currentDate.getMonth() + 1 : because months are from 0 to 11, we need : 1 - 12
-}
-
-// gets and returns the current time
-export function getTime(currentTime) {
-    return `
-       ${currentTime.getHours()}:${currentTime.getMinutes()}
-    `
 }
 
 // calculates and returns the expiration date
@@ -39,9 +30,7 @@ export function getExpirationDate(currentDate) {
         expirationYear += 1;             // and change current year to the next year
     }
 
-    return `
-        ${expirationDay}-${expirationMonth}-${expirationYear}
-    `
+    return `${expirationDay}-${expirationMonth}-${expirationYear}`
 }
 
 // creates a new instance of Task and adds it to the page
@@ -51,9 +40,7 @@ export function createTask() {
     const task = new Task({
         text : taskInput.value,
         creationDate : getCreationDate(currentDate),
-        creationTime : getTime(currentDate),
         expirationDate : getExpirationDate(currentDate),
-        expirationTime : getTime(currentDate)
     });
     tasksObj.push(task);
     document.getElementById('tasks').innerHTML += task.getInnerHtml();
@@ -70,20 +57,11 @@ export function rejectTask() {
     }, 2000);
 }
 
-// creates an input-calendar-group
-export function createInputGroup(inputId, pText) {
+// creates an input-'input-type'-group
+export function createInputGroup({inputId, pText, inputType}) {
     return `
         <div class="groupCalendar">
-            <p>${pText}<input id="${inputId}" type="date" required></p>
-        </div>
-   `
-}
-
-// creates an input-task-modal-group
-export function createInputTask(inputId, pText) {
-    return `
-        <div class="groupCalendar">
-            <p>${pText}<input id="${inputId}" type="text" required></p>
+            <p>${pText}<input id="${inputId}" type="${inputType}" required></p>
         </div>
    `
 }
@@ -114,11 +92,6 @@ export function convertDateReadable(dateString) {
     return dateString.split('-').reverse().join('-');
 }
 
-export function isValidTime(timeEntered) {
-    const timeRegex = new RegExp(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/);
-
-    return timeEntered.match(timeRegex);
-}
 
 export function markAsInvalid(elem) {
     elem.style.color = 'red';
@@ -142,10 +115,12 @@ export function convertForInputDate(dateString) {
     let dateArr = dateString.split('-').reverse(); //['yyyy', 'mm', 'dd']
 
     return dateArr.reduce( (acc, item) => {
-        if(item.length === 1) {
-            return acc + '-0' + item;
-        } else {
-            return acc + '-' + item;
+        if(item !== ' ' && item !== '\n') {
+            if (item.length === 1) {
+                return acc + '-0' + item;
+            } else {
+                return acc + '-' + item;
+            }
         }
     })
 }
