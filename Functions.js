@@ -140,11 +140,12 @@ export function convertForInputDate(dateString) {
     // we have default : dd-mm-yyyy
     // need to return  : yyyy-mm-dd
     let dateArr = dateString.split('-').reverse(); //['yyyy', 'mm', 'dd']
-    // if mm or dd has only 1 symbol, we need to add '0' to the its start
-    dateArr.forEach( (item, i) => {
+
+    return dateArr.reduce( (acc, item) => {
         if(item.length === 1) {
-            dateArr[i] = '0' + item;
+            return acc + '-0' + item;
+        } else {
+            return acc + '-' + item;
         }
     })
-    return dateArr.join('-');
 }

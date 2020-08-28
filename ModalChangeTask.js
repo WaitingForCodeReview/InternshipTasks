@@ -80,11 +80,11 @@ export class ModalChangeTask {
                               isValidTime(changedTaskCreationTime) && isValidTime(changedTaskExpirationTime));
 
             if(allChecked) {
-                toChangeTaskElem.innerText = `Task : ${changedTaskText}`;
-                toChangeCreationDateElem.innerText = `Creation Date : ${convertDateReadable(changedTaskCreationDate)}`;
-                toChangeExpirationDateElem.innerText = `Expiration Date : ${convertDateReadable(changedTaskExpirationDate)}`;
-                toChangeCreationTimeElem.innerText = `Creation Time : ${changedTaskCreationTime}`;
-                toChangeExpirationTimeElem.innerText = `Expiration Time : ${changedTaskExpirationTime}`;
+                toChangeTaskElem.innerText = `Task: ${changedTaskText}`;
+                toChangeCreationDateElem.innerText = `Creation Date: ${convertDateReadable(changedTaskCreationDate)}`;
+                toChangeExpirationDateElem.innerText = `Expiration Date: ${convertDateReadable(changedTaskExpirationDate)}`;
+                toChangeCreationTimeElem.innerText = `Creation Time: ${changedTaskCreationTime}`;
+                toChangeExpirationTimeElem.innerText = `Expiration Time: ${changedTaskExpirationTime}`;
 
                 document.getElementById(modal.selfId).style.display = "none";
             } else {
@@ -147,9 +147,9 @@ export class ModalChangeTask {
 
 
             if(isValidEnter(changedTaskText) && isValidDate(convertDate(changedTaskCreationDate), convertDate(changedTaskExpirationDate))) {
-                toChangeTaskElem.innerText = `Task : ${changedTaskText}`;
-                toChangeCreationDateElem.innerText = `Creation Date : ${convertDateReadable(changedTaskCreationDate)}`;
-                toChangeExpirationDateElem.innerText = `Expiration Date : ${convertDateReadable(changedTaskExpirationDate)}`;
+                toChangeTaskElem.innerText = `Task: ${changedTaskText}`;
+                toChangeCreationDateElem.innerText = `Creation Date: ${convertDateReadable(changedTaskCreationDate)}`;
+                toChangeExpirationDateElem.innerText = `Expiration Date: ${convertDateReadable(changedTaskExpirationDate)}`;
 
                 document.getElementById(modal.selfId).style.display = "none";
             } else {
