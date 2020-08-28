@@ -3,55 +3,42 @@ import {tasksObj} from "./Variables.js";
 export class Task {
     text
     creationDate
-    creationTime
     expirationDate
-    expirationTime
 
     constructor(taskData) {
         Object.assign(this, { ...taskData });
 
-        this.checkBoxId = `checkbox${this.getUniqueId()}`;
-        this.divId = `divId${this.getUniqueId()}`;
-        this.paragraphId = `paragraphId${this.getUniqueId()}`;
-        this.mainId = `mainId${this.getUniqueId()}`;
+        this.taskTextId = `taskTextId${Task.getUniqueId()}`;
+        this.creationDateId = `creationDateId${Task.getUniqueId()}`;
+        this.expirationDateId = `expirationDateId${Task.getUniqueId()}`;
+        this.pencilId = `pencil${Task.getUniqueId()}`
+        this.checkBoxId = `checkbox${Task.getUniqueId()}`;
+        this.divId = `divId${Task.getUniqueId()}`;
+        this.paragraphId = `paragraphId${Task.getUniqueId()}`;
+        this.mainId = `mainId${Task.getUniqueId()}`;
     }
-    getUniqueId() {
+    static getUniqueId() {
         return Date.now();
     }
 
     getInnerHtml() {
         return `
-            <div style="display: flex" id="${this.mainId}">
-                <div style="width: 45%" id="${this.divId}">
+            <div style="width: 100%; display: flex;" id="${this.mainId}">
+                <div style="width: 30%; padding-left: 2rem;" id="${this.divId}">
                     <p>
-                        Task: ${this.text} <br> 
-                        Creation Date: ${this.creationDate} <br>
-                        Creation Time: ${this.creationTime} <br>
-                        Expiration Date: ${this.expirationDate} <br>
-                        Expiration Time: ${this.expirationTime} <br> 
+                        <strong id=${this.taskTextId}>Task: ${this.text}</strong> <br> 
+                        <strong id=${this.creationDateId}>Creation Date: ${this.creationDate}</strong> <br>
+                        <strong id=${this.expirationDateId}>Expiration Date: ${this.expirationDate}</strong> <br>
                     </p>
                 </div>
-                <div style="width: 45%;">
-                    <p id="${this.paragraphId}" class="crossbow" style="margin-left: -3rem; margin-top: 1rem;">&times</p>
-                    <input type="checkbox" id="${this.checkBoxId}" style="width: 25%; height: 25%; margin-top: -7%; margin-left: -10rem;">
-                </div>
-            </div>
-        `
-    }
-
-    getInnerHtmlModal() {
-        return `
-            <div style="display: flex" id="${this.mainId}">
-                <div style="width: 45%" id="${this.divId}">
-                    <p>
-                        Task: ${this.text} <br> 
-                        Creation Date: ${this.creationDate} <br>
-                        Expiration Date: ${this.expirationDate} <br>
-                    </p>
-                </div>
-                <div style="width: 45%;">
-                    <p id="${this.paragraphId}" class="crossbow" style="margin-left: -3rem; margin-top: 1rem;">&times</p>
-                    <input type="checkbox" id="${this.checkBoxId}" style="width: 25%; height: 25%; margin-top: -7%; margin-left: -10rem;">
+                <div style="width: 45%; display: flex; flex-direction: column">
+                    <div style="display: flex; padding-top: 1rem; height: 50px">
+                        <i class="fas fa-edit" id="${this.pencilId}" style="padding-top: 0.7rem"></i>
+                        <p id="${this.paragraphId}" class="crossbow" style=" padding-left: 1rem">&times</p>
+                    </div>
+                    <div style="width: 100%; height: 100%;">
+                        <input type="checkbox" id="${this.checkBoxId}" style="width: 35%; height: 35%">
+                    </div>
                 </div>
             </div>
         `
@@ -66,4 +53,9 @@ export class Task {
         tasksObj.splice(removeElemIndex, 1);
     }
 
+    static replaceTaskWithChanged(changedObject) {
+        const removeElemIndex = tasksObj.findIndex(item => item.mainId === changedObject.mainId);
+
+        tasksObj.splice(removeElemIndex, 1, changedObject);
+    }
 }

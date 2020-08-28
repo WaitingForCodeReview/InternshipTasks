@@ -1,7 +1,6 @@
 import {Task} from "./Task.js";
-import {createInputGroup, isValidEnter, rejectTask} from "./Functions.js";
+import {createInputGroup, isValidEnter, convertDateReadable, markAsInvalid} from "./Functions.js";
 import {taskInput, tasksObj} from "./Variables.js";
-import {createInputTask} from "./Functions.js";
 import {convertDate, isValidDate} from "./Functions.js";
 
 export class Modal {
@@ -23,9 +22,21 @@ export class Modal {
                 <div class="modal_content">
                     <h2>${this.hText}</h2>
                     
-                    ${createInputTask(this.inputTaskId, 'Task :')}
-                    ${createInputGroup(this.inputCreationId, 'Creation Date :')}
-                    ${createInputGroup(this.inputExpirationId, 'Expiration Date :')}
+                    ${createInputGroup({
+                        inputId : this.inputTaskId,
+                        pText : `Task : `,
+                        inputType : 'text'
+                    })}
+                    ${createInputGroup({
+                        inputId : this.inputCreationId,
+                        pText : `Creation Date :`,
+                        inputType : 'date'
+                    })}
+                    ${createInputGroup({
+                        inputId : this.inputExpirationId,
+                        pText : 'Expiration Date :',
+                        inputType : 'date'
+                    })}
                     
                     <a href="#" class="buttonModal" id="${this.buttonOKId}">OK</a>
                     <a href="#" class="buttonModal" id="${this.buttonCANCELId}">CANCEL</a>
@@ -51,43 +62,24 @@ export class Modal {
 
                 const task = new Task({
                     text : inputTask.value,
-                    creationDate : document.getElementById(modal.inputCreationId).value,
-                    creationTime : 'modalEnter',
-                    expirationDate : document.getElementById(modal.inputExpirationId).value,
-                    expirationTime : 'modalEnter',
+                    creationDate : convertDateReadable(document.getElementById(modal.inputCreationId).value),
+                    expirationDate : convertDateReadable(document.getElementById(modal.inputExpirationId).value),
                 });
 
                 tasksObj.push(task);
-                document.getElementById('tasks').innerHTML += task.getInnerHtmlModal();
+                document.getElementById('tasks').innerHTML += task.getInnerHtml();
                 taskInput.value = "";
                 Modal.clearInputs(modal);
                 document.getElementById(modal.selfId).style.display = "none";
             } else {
                 if(!isValidEnter(inputTask.value)){
-                    inputTask.style.color = 'red';
-                    inputTask.style.backgroundColor = ' rgba(255, 0, 0, 0.3)';
-                    setTimeout(() => {
-                        inputTask.style.color = 'black';
-                        inputTask.style.backgroundColor = 'white';
-                    }, 2000);
+                    markAsInvalid(inputTask);
                 }
                 if(!isValidDate(dateCreation,dateExpiration)) {
                     const creationElem = document.getElementById(modal.inputCreationId);
                     const expirationElem = document.getElementById(modal.inputExpirationId);
-
-                    creationElem.style.color = 'red';
-                    creationElem.style.backgroundColor = ' rgba(255, 0, 0, 0.3)';
-                    setTimeout(() => {
-                        creationElem.style.color = 'black';
-                        creationElem.style.backgroundColor = 'white';
-                    }, 2000);
-
-                    expirationElem.style.color = 'red';
-                    expirationElem.style.backgroundColor = ' rgba(255, 0, 0, 0.3)';
-                    setTimeout(() => {
-                        expirationElem.style.color = 'black';
-                        expirationElem.style.backgroundColor = 'white';
-                    }, 2000);
+                    markAsInvalid(creationElem);
+                    markAsInvalid(expirationElem);
                 }
             }
         });
