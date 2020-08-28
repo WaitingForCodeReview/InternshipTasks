@@ -72,7 +72,7 @@ export class ModalChangeTask {
 
             let allChecked = (isValidEnter(changedTaskText) && isValidDate(convertDate(changedTaskCreationDate), convertDate(changedTaskExpirationDate)));
 
-            if(allChecked) {
+            if (allChecked) {
                 toChangeTaskElem.innerText = `Task: ${changedTaskText}`;
                 toChangeCreationDateElem.innerText = `Creation Date: ${convertDateReadable(changedTaskCreationDate)}`;
                 toChangeExpirationDateElem.innerText = `Expiration Date: ${convertDateReadable(changedTaskExpirationDate)}`;
@@ -87,10 +87,10 @@ export class ModalChangeTask {
 
                 document.getElementById(modal.selfId).style.display = "none";
             } else {
-                if(!isValidEnter(changedTaskText)){
+                if (!isValidEnter(changedTaskText)){
                     markAsInvalid(selfInputTaskElem);
                 }
-                if(!isValidDate(convertDate(changedTaskCreationDate), convertDate(changedTaskExpirationDate))) {
+                if (!isValidDate(convertDate(changedTaskCreationDate), convertDate(changedTaskExpirationDate))) {
                     markAsInvalid(selfInputCreationDateElem);
                     markAsInvalid(selfInputExpirationDateElem);
                 }

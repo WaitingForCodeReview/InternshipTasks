@@ -117,7 +117,7 @@ export function convertForInputDate(dateString) {
     let dateArr = dateString.split('-').reverse(); //['yyyy', 'mm', 'dd']
 
     return dateArr.reduce( (acc, item) => {
-        if(item !== ' ' && item !== '\n') {
+        if (item !== ' ' && item !== '\n') {
             if (item.length === 1) {
                 return acc + '-0' + item;
             } else {
@@ -132,5 +132,4 @@ export function refactorTaskMarkup() {
     tasksDivs.forEach(item => Task.removeHtmlTask(item));
     tasksObj.forEach( item => document.getElementById('tasks').innerHTML += item.getInnerHtml());
     tasksObj.forEach( item => item.isCompleted ? markTaskAsDone(item) : markTaskAsUnDone(item));
-    document.getElementById('sortBlock').style.display = 'none';
 }
