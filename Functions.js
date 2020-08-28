@@ -66,13 +66,15 @@ export function createInputGroup({inputId, pText, inputType}) {
    `
 }
 
-export function markTaskAsDone(taskId) {
-    document.getElementById(taskId).style.textDecoration = 'line-through';
-    document.getElementById(taskId).style.color = 'grey';
+export function markTaskAsDone(taskObj) {
+    document.getElementById(taskObj.divId).style.textDecoration = 'line-through';
+    document.getElementById(taskObj.divId).style.color = 'grey';
+    taskObj.isCompleted = true;
 }
-export function markTaskAsUnDone(taskId) {
-    document.getElementById(taskId).style.textDecoration = 'none';
-    document.getElementById(taskId).style.color = 'black';
+export function markTaskAsUnDone(taskObj) {
+    document.getElementById(taskObj.divId).style.textDecoration = 'none';
+    document.getElementById(taskObj.divId).style.color = 'black';
+    taskObj.isCompleted = false;
 }
 
 export function isValidDate(dateStartString, dateEndString) {

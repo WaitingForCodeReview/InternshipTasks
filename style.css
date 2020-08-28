@@ -79,10 +79,7 @@ input:focus ~ label, input:valid ~ label {
 #tasks i {
     cursor: pointer;
 }
-.pencil {
-    position: absolute;
-    margin-top: 1.7rem;
-}
+
 /***/
 
 /*Styles for plus icon*/
@@ -159,4 +156,33 @@ a.buttonModal:active {
             0 -1px 1px 1px rgba(0,0,0,.1);
 }
 /***/
+/**/
+
+/* Styles for buttons */
+#forButtons {
+    text-align: center;
+}
+a.beautifulButton {
+    margin-right: 1rem;
+    display: inline-block;
+    color: black;
+    font-size: 125%;
+    font-weight: 700;
+    text-decoration: none;
+    user-select: none;
+    padding: .25em .5em;
+    outline: none;
+    border: 1px solid rgb(250,172,17);
+    border-radius: 7px;
+    background: rgb(255,212,3) linear-gradient(rgb(255,212,3), rgb(248,157,23));
+    box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
+    transition: box-shadow .2s, border-color .2s;
+}
+a.beautifulButton:hover {
+    box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,.5);
+}
+a.beautifulButton:active {
+    border-color: rgba(177,159,0,1);
+    box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
+}
 /**/

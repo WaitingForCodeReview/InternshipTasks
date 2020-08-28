@@ -39,8 +39,8 @@ plusIcon.addEventListener('click', function plusIconClicked() {
 document.getElementById('tasks').addEventListener('click', function targetCheckBox(event) {
     const target = event.target;
     if(target.type == 'checkbox') {
-        const elementDivId = tasksObj.find(item => item.checkBoxId === target.id).divId;
-        target.checked ? markTaskAsDone(elementDivId) : markTaskAsUnDone(elementDivId);
+        const element = tasksObj.find(item => item.checkBoxId === target.id);
+        target.checked ? markTaskAsDone(element) : markTaskAsUnDone(element);
     }
 });
 
@@ -57,11 +57,37 @@ document.getElementById('tasks').addEventListener('click', function targetEdit(e
         const element = tasksObj.find(item => item.pencilId === target.id);
         let modalChange = new ModalChangeTask({
             selfId : 'changeTask',
-            // toChangeTaskId : element.taskTextId,
-            // toChangeCreationDateId : element.creationDateId,
-            // toChangeExpirationDateId : element.expirationDateId,
             hText : 'User task-change',
             targetObject : element,
         });
     }
 });
+
+document.getElementById('buttonAll').addEventListener('click', function allClicked() {
+    tasksObj.forEach(item => {
+        document.getElementById(item.mainId).style.display = 'flex';
+    })
+})
+document.getElementById('buttonActive').addEventListener('click', function activeClicked() {
+    tasksObj.forEach(item => {
+        if(item.isCompleted === false) {
+            document.getElementById(item.mainId).style.display = 'flex';
+        } else {
+            document.getElementById(item.mainId).style.display = 'none';
+        }
+    })
+})
+document.getElementById('buttonCompleted').addEventListener('click', function completedClicked() {
+    tasksObj.forEach(item => {
+        if(item.isCompleted === true) {
+            document.getElementById(item.mainId).style.display = 'flex';
+        } else {
+            document.getElementById(item.mainId).style.display = 'none';
+        }
+    })
+})
+document.getElementById('buttonClearCompleted').addEventListener('click', function clearCompletedClicked() {
+    const completedObj = tasksObj.filter( item => item.isCompleted === true)
+
+    completedObj.forEach( item => Task.removeTask(item.mainId));
+})
