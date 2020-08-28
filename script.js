@@ -3,6 +3,8 @@ import {createTask, isValidEnter, rejectTask, markTaskAsDone, markTaskAsUnDone} 
 import {taskInput, tasksObj} from "./Variables.js";
 import {Task} from "./Task.js";
 import {ModalChangeTask} from "./ModalChangeTask.js";
+import {convertForInputDate} from "./Functions.js";
+import {refactorTaskMarkup} from "./Functions.js";
 
 
 
@@ -90,4 +92,26 @@ document.getElementById('buttonClearCompleted').addEventListener('click', functi
     const completedObj = tasksObj.filter( item => item.isCompleted === true)
 
     completedObj.forEach( item => Task.removeTask(item.mainId));
+})
+
+document.getElementById('sort').addEventListener('click', function showUnshowSortBlock() {
+    if(document.getElementById('sortBlock').style.display === 'block') {
+        document.getElementById('sortBlock').style.display = 'none';
+    } else {
+        document.getElementById('sortBlock').style.display = 'block';
+    }
+})
+
+
+document.getElementById('sortBlock').addEventListener('click', function sortChoose(event) {
+    const target = event.target;
+
+    if(target.id === 'buttonTextSort') {
+        tasksObj.sort((a,b) => a.text.localeCompare(b.text));
+        refactorTaskMarkup();
+    }
+    if(target.id === 'buttonDateSort') {
+        tasksObj.sort((a,b) => new Date(convertForInputDate(a.creationDate)) - new Date(convertForInputDate(b.creationDate)));
+        refactorTaskMarkup();
+    }
 })

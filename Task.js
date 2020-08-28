@@ -38,7 +38,7 @@ export class Task {
                         <p id="${this.paragraphId}" class="crossbow" style=" padding-left: 1rem">&times</p>
                     </div>
                     <div style="width: 100%; height: 100%;">
-                        <input type="checkbox" id="${this.checkBoxId}" style="width: 35%; height: 35%">
+                        <input type="checkbox" id="${this.checkBoxId}" ${this.isCompleted ? 'checked':''} style="width: 35%; height: 35%">
                     </div>
                 </div>
             </div>
@@ -58,5 +58,9 @@ export class Task {
         const removeElemIndex = tasksObj.findIndex(item => item.mainId === changedObject.mainId);
 
         tasksObj.splice(removeElemIndex, 1, changedObject);
+    }
+
+    static removeHtmlTask(taskDivId) {
+        document.getElementById(taskDivId).parentNode.removeChild(document.getElementById(taskDivId));
     }
 }

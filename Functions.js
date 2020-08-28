@@ -126,3 +126,11 @@ export function convertForInputDate(dateString) {
         }
     })
 }
+
+export function refactorTaskMarkup() {
+    const tasksDivs = tasksObj.map( item => item.mainId);
+    tasksDivs.forEach(item => Task.removeHtmlTask(item));
+    tasksObj.forEach( item => document.getElementById('tasks').innerHTML += item.getInnerHtml());
+    tasksObj.forEach( item => item.isCompleted ? markTaskAsDone(item) : markTaskAsUnDone(item));
+    document.getElementById('sortBlock').style.display = 'none';
+}
