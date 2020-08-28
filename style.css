@@ -60,9 +60,9 @@ input:focus ~ label, input:valid ~ label {
 }
 /*Styles for tasks*/
 #tasks {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin-left: 2rem;
 }
 #tasks p {
     font-size: 25px;
@@ -73,6 +73,7 @@ input:focus ~ label, input:valid ~ label {
 
 .crossbow {
     cursor: pointer;
+    margin: 0;
 }
 
 #tasks i {
