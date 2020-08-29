@@ -6,8 +6,6 @@ export class Task {
     expirationDate
 
     constructor(taskData) {
-        Object.assign(this, { ...taskData });
-
         this.isCompleted = false;
         this.taskTextId = `taskTextId${Task.getUniqueId()}`;
         this.creationDateId = `creationDateId${Task.getUniqueId()}`;
@@ -17,6 +15,8 @@ export class Task {
         this.divId = `divId${Task.getUniqueId()}`;
         this.paragraphId = `paragraphId${Task.getUniqueId()}`;
         this.mainId = `mainId${Task.getUniqueId()}`;
+
+        Object.assign(this, { ...taskData });
     }
     static getUniqueId() {
         return Date.now();

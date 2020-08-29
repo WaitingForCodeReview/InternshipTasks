@@ -231,3 +231,12 @@ a.buttonDiv:active {
     border-radius: 8px;
     display: none;
 }
+
+#addTaskContainer {
+    display: flex;
+}
+
+#sortDiv {
+    margin-top: 5.3rem;
+    margin-left: 3rem;
+}

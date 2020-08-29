@@ -1,7 +1,6 @@
 import {Task} from "./Task.js";
-import {createInputGroup, isValidEnter, convertDateReadable, markAsInvalid} from "./Functions.js";
+import {createInputGroup, isValidEnter, convertDateReadable, markAsInvalid, convertDate, isValidDate} from "./Functions.js";
 import {taskInput, tasksObj} from "./Variables.js";
-import {convertDate, isValidDate} from "./Functions.js";
 
 export class Modal {
     selfId
@@ -78,6 +77,7 @@ export class Modal {
                 if (!isValidDate(dateCreation,dateExpiration)) {
                     const creationElem = document.getElementById(modal.inputCreationId);
                     const expirationElem = document.getElementById(modal.inputExpirationId);
+
                     markAsInvalid(creationElem);
                     markAsInvalid(expirationElem);
                 }
