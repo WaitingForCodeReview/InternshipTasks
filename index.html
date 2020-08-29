@@ -10,19 +10,37 @@
 
 <div id="container">
     <h1>TODO List</h1>
-
+    <div id="forButtons">
+        <a href="#" class="beautifulButton" id="buttonAll">All</a>
+        <a href="#" class="beautifulButton" id="buttonActive">Active</a>
+        <a href="#" class="beautifulButton" id="buttonCompleted">Completed</a>
+        <a href="#" class="beautifulButton" id="buttonClearCompleted">Clear completed</a>
+    </div>
     <div id="tasks"></div>
 
-    <div class="group">
-        <input id="taskInput" type="text" required>
-        <label>Add task here</label>
-        <span><img id="plusImage" src="./images/plusIcon.png" alt="plusIcon"></span>
+    <div id="addTaskContainer">
+        <div id="sortDiv">
+            <span><i class="fas fa-sort-amount-up-alt" id="sort"></i></span>
+        </div>
+        <div class="group">
+            <input id="taskInput" type="text" required>
+            <label>Add task here</label>
+            <span><img id="plusImage" src="./images/plusIcon.png" alt="plusIcon"></span>
+            <span id="sortBlock">
+                <span>
+                    <a href="#" class="buttonDiv" id="buttonTextSort">TextSort</a>
+                </span>
+                <span>
+                    <a href="#" class="buttonDiv" id="buttonDateSort">DateSort</a>
+                </span>
+            </span>
+        </div>
     </div>
 
 </div>
 
 <div id="forModal"></div>
-<div id="forChangeModal"</body>
+<div id="forChangeModal"></div>
 
 
 <script src="script.js" type="module"></script>

@@ -1,6 +1,5 @@
-import {createInputGroup, isValidDate, isValidEnter, convertDate, convertDateReadable, markAsInvalid, sliceElementText} from "./Functions.js";
+import {createInputGroup, isValidDate, isValidEnter, convertDate, convertDateReadable, markAsInvalid, convertForInputDate} from "./Functions.js";
 import {Task} from "./Task.js";
-import {convertForInputDate} from "./Functions.js";
 
 
 export class ModalChangeTask {
@@ -72,25 +71,34 @@ export class ModalChangeTask {
 
             let allChecked = (isValidEnter(changedTaskText) && isValidDate(convertDate(changedTaskCreationDate), convertDate(changedTaskExpirationDate)));
 
-            if(allChecked) {
+            if (allChecked) {
                 toChangeTaskElem.innerText = `Task: ${changedTaskText}`;
                 toChangeCreationDateElem.innerText = `Creation Date: ${convertDateReadable(changedTaskCreationDate)}`;
                 toChangeExpirationDateElem.innerText = `Expiration Date: ${convertDateReadable(changedTaskExpirationDate)}`;
 
-                const changedObject = {
-                    ...modal.targetObject,
+                const changedObject = new Task({
                     text : changedTaskText,
-                    creationDate : changedTaskCreationDate,
-                    expirationDate : changedTaskExpirationDate};
+                    creationDate : convertDateReadable(changedTaskCreationDate),
+                    expirationDate : convertDateReadable(changedTaskExpirationDate),
+                    isCompleted : modal.targetObject.isCompleted,
+                    taskTextId : modal.targetObject.taskTextId,
+                    creationDateI : modal.targetObject.creationDateI,
+                    expirationDateId : modal.targetObject.expirationDateId,
+                    pencilId : modal.targetObject.pencilId,
+                    checkBoxId : modal.targetObject.checkBoxId,
+                    divId : modal.targetObject.divId,
+                    paragraphId : modal.targetObject.paragraphId,
+                    mainId : modal.targetObject.mainId,
+                });
 
                 Task.replaceTaskWithChanged(changedObject);
 
                 document.getElementById(modal.selfId).style.display = "none";
             } else {
-                if(!isValidEnter(changedTaskText)){
+                if (!isValidEnter(changedTaskText)){
                     markAsInvalid(selfInputTaskElem);
                 }
-                if(!isValidDate(convertDate(changedTaskCreationDate), convertDate(changedTaskExpirationDate))) {
+                if (!isValidDate(convertDate(changedTaskCreationDate), convertDate(changedTaskExpirationDate))) {
                     markAsInvalid(selfInputCreationDateElem);
                     markAsInvalid(selfInputExpirationDateElem);
                 }
