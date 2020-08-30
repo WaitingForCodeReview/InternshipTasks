@@ -39,8 +39,8 @@ export function createTask() {
 
     const task = new Task({
         text : taskInput.value,
-        creationDate : getCreationDate(currentDate),
-        expirationDate : getExpirationDate(currentDate),
+        creationDate : convertDateReadable(convertForInputDate(getCreationDate(currentDate))),
+        expirationDate : convertDateReadable(convertForInputDate(getExpirationDate(currentDate))),
     });
     tasksObj.push(task);
     document.getElementById('tasks').innerHTML += task.getInnerHtml();
@@ -122,4 +122,22 @@ export function refactorTaskMarkup() {
     tasksDivs.forEach(item => Task.removeHtmlTask(item));
     tasksObj.forEach( item => document.getElementById('tasks').innerHTML += item.getInnerHtml());
     tasksObj.forEach( item => item.isCompleted ? markTaskAsDone(item) : markTaskAsUnDone(item));
+}
+
+export function isValidDateEnter(dateEnter) {
+    return dateEnter.match(new RegExp("^([0-2][0-9]|(3)[0-1])(\-)(((0)[0-9])|((1)[0-2]))(\-)\\d{4}$"));
+}
+
+export function filterTask(inputValue) {
+    const filtered = tasksObj.filter( item => item.text !== inputValue);
+
+    refactorTaskMarkup();
+    filtered.forEach( item => document.getElementById(item.mainId).style.display = 'none');
+}
+
+export function filterDate(inputValue) {
+    const filtered = tasksObj.filter( item => item.creationDate !== inputValue);
+
+    refactorTaskMarkup();
+    filtered.forEach( item => document.getElementById(item.mainId).style.display = 'none');
 }
