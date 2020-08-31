@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+
+
+
+/* Container Styles*/
+#container {
+    width: 75em;
+    margin: 3rem auto;
+    border: 3px dashed black;
+}
+#container h1 {
+    text-align: center;
+    padding-bottom: 15px;
+}
+/**/
+
+
+/* Input Styles*/
+.group {
+    display: flex;
+    position: relative;
+    margin-bottom: 30px;
+    margin-left: 0.5em;
+    margin-top: 4em;
+}
+
+input {
+    font-size: 16px;
+    padding: 10px;
+    display: block;
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+input:focus {
+    outline: none;
+}
+
+label {
+    color: #999;
+    font-size: 21px;
+    position: absolute;
+    pointer-events: none;
+    left: 10px;
+    top: 15px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label {
+    top: -15px;
+    font-size: 17px;
+    color: #5264AE;
+}
+
+.groupCalendar {
+    padding: 35px;
+}
+/*Styles for tasks*/
+#tasks {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#tasks p {
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Alata', sans-serif;
+    margin-bottom: 4rem;
+}
+
+.crossbow {
+    cursor: pointer;
+    margin: 0;
+}
+
+#tasks i {
+    cursor: pointer;
+}
+
+/***/
+
+/*Styles for plus icon*/
+.group span img {
+    height: 20px;
+    width: 20px;
+    margin-left: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+#sort {
+    cursor: pointer;
+}
+/**/
+
+/*Styles for modal*/
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 1000;
+}
+.modal .modal_content {
+    background-color: #fefefe;
+    position: absolute;
+    left: 25%;
+    top: 15%;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    z-index: 99999;
+}
+.modal .modal_content h2 {
+    text-align: center;
+}
+
+/*OK CANCEL buttons styles*/
+a.buttonModal {
+    display: inline-block;
+    width: 5em;
+    height: 2em;
+    line-height: 2em;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    color: rgb(0,0,0);
+    outline: none;
+    border: 1px solid rgba(0,0,0,.4);
+    border-top-color: rgba(0,0,0,.3);
+    border-radius: 2px;
+    background: linear-gradient(rgb(255,255,255), rgb(240,240,240));
+    box-shadow:
+            0 0 3px rgba(0,0,0,0) inset,
+            0 1px 1px 1px rgba(255,255,255,.2),
+            0 -1px 1px 1px rgba(0,0,0,0);
+    transition: .2s ease-in-out;
+    margin-right: 5px;
+    margin-left: 60px;
+}
+a.buttonModal:hover:not(:active) {
+    box-shadow:
+            0 0 3px rgba(0,0,0,0) inset,
+            0 1px 1px 1px rgba(0,255,255,.5),
+            0 -1px 1px 1px rgba(0,255,255,.5);
+}
+a.buttonModal:active {
+    background: linear-gradient(rgb(250,250,250), rgb(235,235,235));
+    box-shadow:
+            0 0 3px rgba(0,0,0,.5) inset,
+            0 1px 1px 1px rgba(255,255,255,.4),
+            0 -1px 1px 1px rgba(0,0,0,.1);
+}
+/***/
+/**/
+
+/* Styles for buttons */
+#forButtons {
+    text-align: center;
+}
+a.beautifulButton {
+    margin-right: 1rem;
+    display: inline-block;
+    color: black;
+    font-size: 125%;
+    font-weight: 700;
+    text-decoration: none;
+    user-select: none;
+    padding: .25em .5em;
+    outline: none;
+    border: 1px solid rgb(250,172,17);
+    border-radius: 7px;
+    background: rgb(255,212,3) linear-gradient(rgb(255,212,3), rgb(248,157,23));
+    box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
+    transition: box-shadow .2s, border-color .2s;
+}
+a.beautifulButton:hover {
+    box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,.5);
+}
+a.beautifulButton:active {
+    border-color: rgba(177,159,0,1);
+    box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
+}
+/**/
+
+a.buttonDiv {
+    display: inline-block;
+    width: 4em;
+    height: 1em;
+    line-height: 1em;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    color: rgb(0,0,0);
+    outline: none;
+    border: 1px solid rgba(0,0,0,.4);
+    border-top-color: rgba(0,0,0,.3);
+    border-radius: 2px;
+    background: linear-gradient(rgb(255,255,255), rgb(240,240,240));
+    box-shadow:
+            0 0 3px rgba(0,0,0,0) inset,
+            0 1px 1px 1px rgba(255,255,255,.2),
+            0 -1px 1px 1px rgba(0,0,0,0);
+    transition: .2s ease-in-out;
+    margin: 5px;
+}
+a.buttonDiv:hover:not(:active) {
+    box-shadow:
+            0 0 3px rgba(0,0,0,0) inset,
+            0 1px 1px 1px rgba(0,255,255,.5),
+            0 -1px 1px 1px rgba(0,255,255,.5);
+}
+a.buttonDiv:active {
+    background: linear-gradient(rgb(250,250,250), rgb(235,235,235));
+    box-shadow:
+            0 0 3px rgba(0,0,0,.5) inset,
+            0 1px 1px 1px rgba(255,255,255,.4),
+            0 -1px 1px 1px rgba(0,0,0,.1);
+}
+#sortBlock {
+    width: 15rem;
+    margin-left: 1rem;
+    height: 6rem;
+    border: 2px solid black;
+    border-radius: 8px;
+    display: none;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+#addTaskContainer {
+    display: flex;
+}
+
+#sortDiv {
+    margin-top: 5.3rem;
+    margin-left: 3rem;
+}
+
+#filterInput {
+    width: 7rem;
+    font-size: 15px;
+    margin-left: 21.5%;
+}
+#buttonsSortDiv {
+    text-align: center;
+}
+#filterDiv {
+    text-align: center;
+}

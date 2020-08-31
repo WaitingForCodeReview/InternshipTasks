@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/4f7f08c96e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div id="container">
+    <h1>TODO List</h1>
+    <div id="forButtons">
+        <a href="#" class="beautifulButton" id="buttonAll">All</a>
+        <a href="#" class="beautifulButton" id="buttonActive">Active</a>
+        <a href="#" class="beautifulButton" id="buttonCompleted">Completed</a>
+        <a href="#" class="beautifulButton" id="buttonClearCompleted">Clear completed</a>
+    </div>
+    <div id="tasks"></div>
+
+    <div id="addTaskContainer">
+        <div id="sortDiv">
+            <span><i class="fas fa-sort-amount-up-alt" id="sort"></i></span>
+        </div>
+        <div class="group">
+            <input id="taskInput" type="text" required>
+            <label>Add task here</label>
+            <span><img id="plusImage" src="./images/plusIcon.png" alt="plusIcon"></span>
+        </div>
+            <span id="sortBlock">
+                <div id="buttonsSortDiv">
+                    <span>
+                        <a href="#" class="buttonDiv" id="buttonTextSort">TextSort</a>
+                    </span>
+                    <span>
+                        <a href="#" class="buttonDiv" id="buttonDateSort">DateSort</a>
+                    </span>
+                </div>
+                <div id="filterDiv">
+                    <input type="text" id="filterInput">
+                    <a href="#" class="buttonDiv" id="buttonFilter">Filter</a>
+                </div>
+            </span>
+    </div>
+
+</div>
+
+<div id="forModal"></div>
+<div id="forChangeModal"></div>
+
+
+<script src="script.js" type="module"></script>
+</body>
+</html>
