@@ -1,5 +1,5 @@
 import {Task} from "./Task.js";
-import {regex, taskInput, tasksObj, INVALID_DATE} from "./Variables.js";
+import {regex, taskInput, tasksObj, INVALID_DATE, dateRegex} from "./Variables.js";
 
 export function isValidEnter(userEnter) {
     return userEnter.match(regex);
@@ -39,8 +39,8 @@ export function createTask() {
 
     const task = new Task({
         text : taskInput.value,
-        creationDate : getCreationDate(currentDate),
-        expirationDate : getExpirationDate(currentDate),
+        creationDate : convertDateReadable(convertForInputDate(getCreationDate(currentDate))),
+        expirationDate : convertDateReadable(convertForInputDate(getExpirationDate(currentDate))),
     });
     tasksObj.push(task);
     document.getElementById('tasks').innerHTML += task.getInnerHtml();
@@ -122,4 +122,13 @@ export function refactorTaskMarkup() {
     tasksDivs.forEach(item => Task.removeHtmlTask(item));
     tasksObj.forEach( item => document.getElementById('tasks').innerHTML += item.getInnerHtml());
     tasksObj.forEach( item => item.isCompleted ? markTaskAsDone(item) : markTaskAsUnDone(item));
+}
+
+export function isValidDateEnter(dateEnter) {
+    return dateEnter.match(dateRegex);
+}
+
+export function filterTask(filtered) {
+    refactorTaskMarkup();
+    filtered.forEach( item => document.getElementById(item.mainId).style.display = 'none');
 }

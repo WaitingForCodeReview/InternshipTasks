@@ -1,8 +1,9 @@
 import {Modal} from './Modal.js';
-import {createTask, isValidEnter, rejectTask, markTaskAsDone, markTaskAsUnDone, convertForInputDate, refactorTaskMarkup} from "./Functions.js";
+import {createTask, isValidEnter, rejectTask, markTaskAsDone, markTaskAsUnDone, convertForInputDate, refactorTaskMarkup, markAsInvalid, isValidDateEnter} from "./Functions.js";
 import {taskInput, tasksObj} from "./Variables.js";
 import {Task} from "./Task.js";
 import {ModalChangeTask} from "./ModalChangeTask.js";
+import {filterTask} from "./Functions.js";
 
 let pageState = 'All';
 
@@ -111,10 +112,11 @@ document.getElementById('buttonClearCompleted').addEventListener('click', functi
 
 document.getElementById('sort').addEventListener('click', function showUnshowSortBlock() {
     const element = document.getElementById('sortBlock');
-    if (element.style.display === 'block') {
+
+    if (element.style.display === 'flex') {
         element.style.display = 'none';
     } else {
-        element.style.display = 'block';
+        element.style.display = 'flex';
     }
 })
 
@@ -129,5 +131,20 @@ document.getElementById('sortBlock').addEventListener('click', function sortChoo
     if (target.id === 'buttonDateSort') {
         tasksObj.sort((a,b) => new Date(convertForInputDate(a.creationDate)) - new Date(convertForInputDate(b.creationDate)));
         refactorTaskMarkup();
+    }
+})
+
+document.getElementById('buttonFilter').addEventListener('click', function filterTasks() {
+    const inputElem = document.getElementById('filterInput');
+    const inputValue = inputElem.value;
+
+    if (isValidEnter(inputValue)) {
+        const filtered = tasksObj.filter( item => item.text !== inputValue);
+        filterTask(filtered);
+    } else if (isValidDateEnter(inputValue)) {
+        const filtered = tasksObj.filter( item => item.creationDate !== inputValue);
+        filterTask(filtered);
+    } else {
+        markAsInvalid(inputElem);
     }
 })
