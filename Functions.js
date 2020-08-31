@@ -1,5 +1,5 @@
 import {Task} from "./Task.js";
-import {regex, taskInput, tasksObj, INVALID_DATE} from "./Variables.js";
+import {regex, taskInput, tasksObj, INVALID_DATE, dateRegex} from "./Variables.js";
 
 export function isValidEnter(userEnter) {
     return userEnter.match(regex);
@@ -125,19 +125,10 @@ export function refactorTaskMarkup() {
 }
 
 export function isValidDateEnter(dateEnter) {
-    return dateEnter.match(new RegExp("^([0-2][0-9]|(3)[0-1])(\-)(((0)[0-9])|((1)[0-2]))(\-)\\d{4}$"));
+    return dateEnter.match(dateRegex);
 }
 
-export function filterTask(inputValue) {
-    const filtered = tasksObj.filter( item => item.text !== inputValue);
-
-    refactorTaskMarkup();
-    filtered.forEach( item => document.getElementById(item.mainId).style.display = 'none');
-}
-
-export function filterDate(inputValue) {
-    const filtered = tasksObj.filter( item => item.creationDate !== inputValue);
-
+export function filterTask(filtered) {
     refactorTaskMarkup();
     filtered.forEach( item => document.getElementById(item.mainId).style.display = 'none');
 }

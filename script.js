@@ -3,7 +3,7 @@ import {createTask, isValidEnter, rejectTask, markTaskAsDone, markTaskAsUnDone, 
 import {taskInput, tasksObj} from "./Variables.js";
 import {Task} from "./Task.js";
 import {ModalChangeTask} from "./ModalChangeTask.js";
-import {filterTask, filterDate} from "./Functions.js";
+import {filterTask} from "./Functions.js";
 
 let pageState = 'All';
 
@@ -112,6 +112,7 @@ document.getElementById('buttonClearCompleted').addEventListener('click', functi
 
 document.getElementById('sort').addEventListener('click', function showUnshowSortBlock() {
     const element = document.getElementById('sortBlock');
+
     if (element.style.display === 'flex') {
         element.style.display = 'none';
     } else {
@@ -138,9 +139,11 @@ document.getElementById('buttonFilter').addEventListener('click', function filte
     const inputValue = inputElem.value;
 
     if (isValidEnter(inputValue)) {
-        filterTask(inputValue);
+        const filtered = tasksObj.filter( item => item.text !== inputValue);
+        filterTask(filtered);
     } else if (isValidDateEnter(inputValue)) {
-        filterDate(inputValue);
+        const filtered = tasksObj.filter( item => item.creationDate !== inputValue);
+        filterTask(filtered);
     } else {
         markAsInvalid(inputElem);
     }
